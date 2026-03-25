@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResQ - Real-time Emergency Response Dashboard</title>
+  <link rel="stylesheet" href="./static/style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+</head>
+<body>
+  <!-- Background Video -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="./static/bg.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <div id="app">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">ResQ 🚨</div>
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" data-section="cameras">
+        <span class="nav-icon">📹</span> Cameras
+      </a>
+      <a href="#" class="nav-item" data-section="alerts">
+        <span class="nav-icon">🔔</span> Alerts
+      </a>
+      <a href="#" class="nav-item" data-section="reports">
+        <span class="nav-icon">📈</span> Reports
+      </a>
+      <a href="#" class="nav-item" data-section="settings">
+        <span class="nav-icon">⚙️</span> Settings
+      </a>
+    </nav>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- Header -->
+      <header class="header">
+        <div>Live Response Center</div>
+        <div class="user-info">Operator: John Doe • <a href="./login.html">Logout</a></div>
+      </header>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Live Video (full height left) -->
+        <section class="video-section panel">
+          <div class="panel-header">
+            <span>Live Video Feed - <span id="currentCamera">cam1</span></span>
+            <div>
+              <select id="cameraSelect">
+                <option value="cam1">Camera 1</option>
+                <option value="cam2">Camera 2</option>
+                <option value="cam3">Camera 3</option>
+                <option value="cam4">Camera 4</option>
+              </select>
+            </div>
+          </div>
+          <div id="video-container">
+            <video id="liveVideo" muted playsinline></video>
+            <canvas id="bboxCanvas" class="video-overlay"></canvas>
+            <div class="confidence" id="confidence">94.2%</div>
+            <div class="video-controls">
+              <button id="startBtn" class="control-btn">Start Stream</button>
+              <button id="snapshotBtn" class="control-btn">📸 Snapshot</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Alerts Panel -->
+        <section class="alerts-section panel">
+          <div class="panel-header">
+            Active Alerts <span id="alertCount">(0)</span>
+          </div>
+          <div id="alertList" class="alert-list scrollbar"></div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section panel">
+          <div class="panel-header">
+            GPS Map & Location Markers
+          </div>
+          <div id="map"></div>
+        </section>
+
+        <!-- System Status -->
+        <section class="status-section panel">
+          <div class="panel-header">System Status</div>
+        <div class="status-grid" id="statusGrid"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  
+  <!-- ResQ Scripts -->
+  <script src="./static/map.js"></script>
+  <script src="./static/script.js"></script>
+
+  
+
+</body>
+</html>
